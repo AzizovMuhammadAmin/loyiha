@@ -67,13 +67,283 @@ data = data.map((item, index) => {
 });
 localStorage.setItem('gm_products', JSON.stringify(data));
 
-const typeLabels = {
+let typeLabels = {
   filter: "Filtr",
   brake: "Tormoz",
   engine: "Dvigatel",
   suspension: "Hadavoy qism",
   original: "Radnoy detallar",
   accessories: "Bezklar"
+};
+
+const translations = {
+  uz: {
+    nav_categories: "Kategoriyalar",
+    nav_about: "Biz haqimizda",
+    nav_help: "Yordam markazi",
+    cat_all: "Hammasi",
+    cat_engine: "Dvigatel qismlari",
+    cat_suspension: "Hadavoy qism",
+    cat_brake: "Tormoz tizimi",
+    cat_filter: "Filtrlar",
+    cat_original: "Radnoy detallar",
+    cat_accessories: "Bezklar",
+    nav_news: "Yangiliklar",
+    nav_careers: "Karyera",
+    nav_locations: "Manzillar",
+    nav_faq: "FAQ",
+    nav_contact: "Bog'lanish",
+    nav_support: "Texnik yordam",
+    login: "Kirish",
+    logout: "Chiqish",
+    hero_badge_1: "Original GM Parts",
+    hero_title_1: "Dvigatel Qismlari",
+    hero_subtitle_1: "Chevrolet avtomobillari uchun yuqori sifatli original dvigatel va agregat qismlari.",
+    buy_now: "Sotib olish",
+    catalog: "Katalog",
+    hero_badge_2: "Chidamlilik",
+    hero_title_2: "Hadavoy Qism",
+    hero_subtitle_2: "Silliq va xavfsiz harakatlanish uchun purjina, amortizator va g'ildirak qismlari.",
+    contact: "Bog'lanish",
+    hero_badge_3: "Tezkor Yetkazib Berish",
+    hero_title_3: "Kuzov Qismlari",
+    hero_subtitle_3: "Fara, bamper va boshqa kuzov detallari shahar bo'ylab tezkor yetkazib berish bilan.",
+    go_to_cart: "Savatchaga o'tish",
+    all_parts: "Barcha qismlar",
+    parts_label: "Ehtiyot qismlar",
+    parts_title: "GM ehtiyot qismlarini tanlang",
+    parts_subtitle: "Chevrolet avtomobillaringiz uchun yuqori sifatli ehtiyot qismlar",
+    cat_engine_short: "Dvigatel",
+    cat_suspension_short: "Hadavoy qism",
+    cat_brake_short: "Tormoz",
+    cat_filter_short: "Filtrlar",
+    cat_original_short: "Radnoy detallar",
+    cat_accessories_short: "Bezklar",
+    shop_modal_title: "GM Online Shop",
+    shop_modal_subtitle: "Barcha ehtiyot qismlar va aksessuarlar bir joyda",
+    shop_cat_kuzov: "Kuzov qismlari",
+    shop_cat_kuzov_desc: "Bamper, fara, eshiklar",
+    shop_cat_engine: "Dvigatel",
+    shop_cat_engine_desc: "Porshen, remen, svecha",
+    shop_cat_elektr: "Elektr jihozlari",
+    shop_cat_elektr_desc: "Akumulyator, datchiklar",
+    shop_cat_service: "Xizmat ko'rsatish",
+    shop_cat_service_desc: "Yog'lar, filtrlar, suyuqliklar",
+    view_full_catalog: "To'liq katalogni ko'rish",
+    features_badge: "Kafolat",
+    features_title: "100% Original GM Ehtiyot Qismlari",
+    features_desc: "Biz faqatgina Chevrolet zavodlaridan to'g'ridan-to'g'ri keltirilgan original mahsulotlarni sotamiz.",
+    feature_1: "Sifat kafolati va original mahsulotlar",
+    feature_2: "O'zbekiston bo'ylab tezkor yetkazib berish",
+    feature_3: "Mutaxassisdan bepul texnik maslahat",
+    learn_more: "Batafsil ma'lumot",
+    footer_desc: "Chevrolet avtomobillari uchun original GM ehtiyot qismlari do'koni. Sifat va ishonch kafolati.",
+    footer_main: "Asosiy",
+    footer_orders: "Mening buyurtmalarim",
+    footer_cart: "Savatcha",
+    footer_profile: "Profil",
+    footer_categories: "Kategoriyalar",
+    cat_trans: "Transmissiya",
+    footer_company: "Kompaniya",
+    footer_about: "Biz haqimizda",
+    footer_careers: "Karyera",
+    footer_contact: "Aloqa",
+    newsletter_title: "Newsletter",
+    newsletter_desc: "Eng so'nggi yangiliklar va chegirmalardan xabardor bo'ling.",
+    email_placeholder: "Emailingiz",
+    subscribe: "Obuna bo'lish",
+    login_title: "Xush kelibsiz",
+    login_subtitle: "Tizimga kirish uchun ma'lumotlaringizni kiriting",
+    email_label: "Email",
+    phone_label: "Telefon raqami",
+    password_label: "Parol",
+    remember_me: "Eslab qolish",
+    forgot_password: "Parolni unutdingizmi?",
+    login_btn: "Kirish",
+    cart_title: "Savatcha",
+    cart_subtitle: "Siz tanlagan mahsulotlar ro'yxati",
+    empty_cart: "Savatchangiz hozircha bo'sh.",
+    total: "Umumiy:",
+    order_btn: "Buyurtma qilish"
+  },
+  ru: {
+    nav_categories: "Категории",
+    nav_about: "О нас",
+    nav_help: "Помощь",
+    cat_all: "Все",
+    cat_engine: "Детали двигателя",
+    cat_suspension: "Ходовая часть",
+    cat_brake: "Тормозная система",
+    cat_filter: "Фильтры",
+    cat_original: "Оригинальные детали",
+    cat_accessories: "Аксессуары",
+    nav_news: "Новости",
+    nav_careers: "Карьера",
+    nav_locations: "Адреса",
+    nav_faq: "Часто задаваемые вопросы",
+    nav_contact: "Контакты",
+    nav_support: "Техподдержка",
+    login: "Вход",
+    logout: "Выход",
+    hero_badge_1: "Оригинальные запчасти GM",
+    hero_title_1: "Детали Двигателя",
+    hero_subtitle_1: "Высококачественные оригинальные детали двигателя и агрегатов для автомобилей Chevrolet.",
+    buy_now: "Купить",
+    catalog: "Каталог",
+    hero_badge_2: "Надежность",
+    hero_title_2: "Ходовая Часть",
+    hero_subtitle_2: "Пружины, амортизаторы и детали колес для плавного и безопасного движения.",
+    contact: "Контакты",
+    hero_badge_3: "Быстрая Доставка",
+    hero_title_3: "Кузовные Детали",
+    hero_subtitle_3: "Фары, бамперы и другие детали кузова с быстрой доставкой по городу.",
+    go_to_cart: "В корзину",
+    all_parts: "Все детали",
+    parts_label: "Запчасти",
+    parts_title: "Выбирайте запчасти GM",
+    parts_subtitle: "Высококачественные запчасти для ваших автомобилей Chevrolet",
+    cat_engine_short: "Двигатель",
+    cat_suspension_short: "Ходовая",
+    cat_brake_short: "Тормоза",
+    cat_filter_short: "Фильтры",
+    cat_original_short: "Оригинал",
+    cat_accessories_short: "Аксессуары",
+    shop_modal_title: "GM Онлайн Магазин",
+    shop_modal_subtitle: "Все запчасти и аксессуары в одном месте",
+    shop_cat_kuzov: "Кузовные детали",
+    shop_cat_kuzov_desc: "Бампер, фары, двери",
+    shop_cat_engine: "Двигатель",
+    shop_cat_engine_desc: "Поршни, ремни, свечи",
+    shop_cat_elektr: "Электрооборудование",
+    shop_cat_elektr_desc: "Аккумуляторы, датчики",
+    shop_cat_service: "Обслуживание",
+    shop_cat_service_desc: "Масла, фильтры, жидкости",
+    view_full_catalog: "Посмотреть полный каталог",
+    features_badge: "Гарантия",
+    features_title: "100% Оригинальные запчасти GM",
+    features_desc: "Мы продаем только оригинальную продукцию, поставляемую напрямую с заводов Chevrolet.",
+    feature_1: "Гарантия качества и оригинальная продукция",
+    feature_2: "Быстрая доставка по всему Узбекистану",
+    feature_3: "Бесплатная техническая консультация специалиста",
+    learn_more: "Подробнее",
+    footer_desc: "Магазин оригинальных запчастей GM для автомобилей Chevrolet. Гарантия качества и надежности.",
+    footer_main: "Главная",
+    footer_orders: "Мои заказы",
+    footer_cart: "Корзина",
+    footer_profile: "Профиль",
+    footer_categories: "Категории",
+    cat_trans: "Трансмиссия",
+    footer_company: "Компания",
+    footer_about: "О нас",
+    footer_careers: "Карьера",
+    footer_contact: "Контакты",
+    newsletter_title: "Новости",
+    newsletter_desc: "Будьте в курсе последних новостей и скидок.",
+    email_placeholder: "Ваш Email",
+    subscribe: "Подписаться",
+    login_title: "Добро пожаловать",
+    login_subtitle: "Введите данные для входа в систему",
+    email_label: "Email",
+    phone_label: "Номер телефона",
+    password_label: "Пароль",
+    remember_me: "Запомнить меня",
+    forgot_password: "Забыли пароль?",
+    login_btn: "Войти",
+    cart_title: "Корзина",
+    cart_subtitle: "Список выбранных товаров",
+    empty_cart: "Ваша корзина пока пуста.",
+    total: "Итого:",
+    order_btn: "Оформить заказ"
+  },
+  en: {
+    nav_categories: "Categories",
+    nav_about: "About Us",
+    nav_help: "Help Center",
+    cat_all: "All",
+    cat_engine: "Engine Parts",
+    cat_suspension: "Suspension",
+    cat_brake: "Brake System",
+    cat_filter: "Filters",
+    cat_original: "Original Parts",
+    cat_accessories: "Accessories",
+    nav_news: "News",
+    nav_careers: "Careers",
+    nav_locations: "Locations",
+    nav_faq: "FAQ",
+    nav_contact: "Contact",
+    nav_support: "Tech Support",
+    login: "Login",
+    logout: "Logout",
+    hero_badge_1: "Original GM Parts",
+    hero_title_1: "Engine Parts",
+    hero_subtitle_1: "High-quality original engine and unit parts for Chevrolet vehicles.",
+    buy_now: "Buy Now",
+    catalog: "Catalog",
+    hero_badge_2: "Durability",
+    hero_title_2: "Suspension Parts",
+    hero_subtitle_2: "Springs, shock absorbers and wheel parts for smooth and safe movement.",
+    contact: "Contact",
+    hero_badge_3: "Fast Delivery",
+    hero_title_3: "Body Parts",
+    hero_subtitle_3: "Headlights, bumpers and other body parts with fast city-wide delivery.",
+    go_to_cart: "Go to Cart",
+    all_parts: "All Parts",
+    parts_label: "Spare Parts",
+    parts_title: "Choose GM Spare Parts",
+    parts_subtitle: "High-quality spare parts for your Chevrolet vehicles",
+    cat_engine_short: "Engine",
+    cat_suspension_short: "Suspension",
+    cat_brake_short: "Brakes",
+    cat_filter_short: "Filters",
+    cat_original_short: "Original",
+    cat_accessories_short: "Accessories",
+    shop_modal_title: "GM Online Shop",
+    shop_modal_subtitle: "All spare parts and accessories in one place",
+    shop_cat_kuzov: "Body Parts",
+    shop_cat_kuzov_desc: "Bumper, headlight, doors",
+    shop_cat_engine: "Engine",
+    shop_cat_engine_desc: "Piston, belt, spark plug",
+    shop_cat_elektr: "Electrical Equipment",
+    shop_cat_elektr_desc: "Battery, sensors",
+    shop_cat_service: "Service",
+    shop_cat_service_desc: "Oils, filters, liquids",
+    view_full_catalog: "View Full Catalog",
+    features_badge: "Warranty",
+    features_title: "100% Original GM Spare Parts",
+    features_desc: "We only sell original products imported directly from Chevrolet factories.",
+    feature_1: "Quality assurance and original products",
+    feature_2: "Fast delivery across Uzbekistan",
+    feature_3: "Free technical consultation from an expert",
+    learn_more: "Learn More",
+    footer_desc: "Original GM spare parts store for Chevrolet vehicles. Quality and reliability guarantee.",
+    footer_main: "Main",
+    footer_orders: "My Orders",
+    footer_cart: "Cart",
+    footer_profile: "Profile",
+    footer_categories: "Categories",
+    cat_trans: "Transmission",
+    footer_company: "Company",
+    footer_about: "About Us",
+    footer_careers: "Careers",
+    footer_contact: "Contact",
+    newsletter_title: "Newsletter",
+    newsletter_desc: "Stay informed about the latest news and discounts.",
+    email_placeholder: "Your Email",
+    subscribe: "Subscribe",
+    login_title: "Welcome",
+    login_subtitle: "Enter your details to log in",
+    email_label: "Email",
+    phone_label: "Phone Number",
+    password_label: "Password",
+    remember_me: "Remember me",
+    forgot_password: "Forgot password?",
+    login_btn: "Login",
+    cart_title: "Cart",
+    cart_subtitle: "List of selected products",
+    empty_cart: "Your cart is currently empty.",
+    total: "Total:",
+    order_btn: "Order Now"
+  }
 };
 
 const container = document.getElementById("cards");
@@ -422,14 +692,17 @@ document.getElementById('orderBtn').addEventListener('click', () => {
 function refreshLoginButton() {
     const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
     const loginBtn = document.getElementById('loginBtn');
+    const lang = localStorage.getItem('selected_lang') || 'uz';
+    const t = translations[lang.toLowerCase()];
+
     if (isLoggedIn) {
         if (loginBtn) {
-            loginBtn.textContent = 'Chiqish';
+            loginBtn.textContent = t.logout;
             loginBtn.classList.add('logged-in');
         }
     } else {
         if (loginBtn) {
-            loginBtn.textContent = 'Kirish';
+            loginBtn.textContent = t.login;
             loginBtn.classList.remove('logged-in');
         }
     }
@@ -472,6 +745,95 @@ if (hamburger && nav) {
     });
   });
 }
+
+// --- LANGUAGE SELECTOR LOGIC ---
+const langSelector = document.querySelector('.lang-selector');
+const langBtn = document.getElementById('langBtn');
+const langItems = document.querySelectorAll('.lang-item');
+
+if (langBtn && langSelector) {
+  langBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    langSelector.classList.toggle('is-open');
+    
+    // Close other dropdowns if any are open
+    document.querySelectorAll('.nav__item--dropdown').forEach(item => {
+      if (item !== langSelector) item.classList.remove('is-open');
+    });
+  });
+}
+
+langItems.forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    const lang = item.dataset.lang.toLowerCase();
+    changeLanguage(lang);
+    langSelector.classList.remove('is-open');
+  });
+});
+
+function changeLanguage(lang) {
+  const t = translations[lang];
+  if (!t) return;
+
+  // Update all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      // If it's a link or button with an SVG, we need to preserve the SVG
+      const svg = el.querySelector('svg');
+      if (svg) {
+        el.innerHTML = t[key] + ' ' + svg.outerHTML;
+      } else {
+        el.textContent = t[key];
+      }
+    }
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key]) {
+      el.setAttribute('placeholder', t[key]);
+    }
+  });
+
+  // Update typeLabels for products
+  typeLabels = {
+    filter: t.cat_filter_short,
+    brake: t.cat_brake_short,
+    engine: t.cat_engine_short,
+    suspension: t.cat_suspension_short,
+    original: t.cat_original_short,
+    accessories: t.cat_accessories_short
+  };
+
+  // Update header button label
+  if (langBtn) {
+    langBtn.querySelector('span').textContent = lang.toUpperCase();
+  }
+
+  // Refresh login button text
+  refreshLoginButton();
+
+  // Re-render products to apply translated labels
+  const activeTab = document.querySelector('.tab.active');
+  render(activeTab ? activeTab.dataset.type : 'all');
+
+  localStorage.setItem('selected_lang', lang);
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', (e) => {
+  if (langSelector && !langSelector.contains(e.target)) {
+    langSelector.classList.remove('is-open');
+  }
+});
+
+// Load saved language
+const savedLang = localStorage.getItem('selected_lang') || 'uz';
+changeLanguage(savedLang);
 
 // --- HERO SLIDER LOGIC ---
 const slider = document.getElementById("heroSlider");

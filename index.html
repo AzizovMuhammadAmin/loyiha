@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/main.css" />
-  <link rel="shortcut icon" href="./images/751.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./images/" type="image/x-icon">
   <script>
     (function() {
       const theme = localStorage.getItem('theme') || 'light';
@@ -19,7 +19,6 @@
     })();
   </script>
 </head>
-jj
 <body>
 
   <!-- HEADER -->
@@ -32,31 +31,31 @@ jj
         </a>
         <nav class="nav">
           <div class="nav__item nav__item--dropdown">
-            <a href="#parts" class="nav__link">Kategoriyalar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <a href="#parts" class="nav__link" data-i18n="nav_categories">Kategoriyalar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
             <div class="dropdown-menu">
-              <a href="#parts" class="dropdown-item" data-type="all">Hammasi</a>
-              <a href="#parts" class="dropdown-item" data-type="engine">Dvigatel qismlari</a>
-              <a href="#parts" class="dropdown-item" data-type="suspension">Hadavoy qism</a>
-              <a href="#parts" class="dropdown-item" data-type="brake">Tormoz tizimi</a>
-              <a href="#parts" class="dropdown-item" data-type="filter">Filtrlar</a>
-              <a href="#parts" class="dropdown-item" data-type="original">Radnoy detallar</a>
-              <a href="#parts" class="dropdown-item" data-type="accessories">Bezklar</a>
+              <a href="#parts" class="dropdown-item" data-type="all" data-i18n="cat_all">Hammasi</a>
+              <a href="#parts" class="dropdown-item" data-type="engine" data-i18n="cat_engine">Dvigatel qismlari</a>
+              <a href="#parts" class="dropdown-item" data-type="suspension" data-i18n="cat_suspension">Hadavoy qism</a>
+              <a href="#parts" class="dropdown-item" data-type="brake" data-i18n="cat_brake">Tormoz tizimi</a>
+              <a href="#parts" class="dropdown-item" data-type="filter" data-i18n="cat_filter">Filtrlar</a>
+              <a href="#parts" class="dropdown-item" data-type="original" data-i18n="cat_original">Radnoy detallar</a>
+              <a href="#parts" class="dropdown-item" data-type="accessories" data-i18n="cat_accessories">Bezklar</a>
             </div>
           </div>
           <div class="nav__item nav__item--dropdown">
-            <a href="#" class="nav__link">Biz haqimizda <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <a href="#" class="nav__link" data-i18n="nav_about">Biz haqimizda <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
             <div class="dropdown-menu">
-              <a href="./about.html" class="dropdown-item">News</a>
-              <a href="./about.html" class="dropdown-item">Careers</a>
-              <a href="./about.html" class="dropdown-item">Locations</a>
+              <a href="./about.html" class="dropdown-item" data-i18n="nav_news">News</a>
+              <a href="./about.html" class="dropdown-item" data-i18n="nav_careers">Careers</a>
+              <a href="./about.html" class="dropdown-item" data-i18n="nav_locations">Locations</a>
             </div>
           </div>
           <div class="nav__item nav__item--dropdown">
-            <a href="#" class="nav__link">Yordam markazi <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <a href="#" class="nav__link" data-i18n="nav_help">Yordam markazi <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
             <div class="dropdown-menu">
-              <a href="#" class="dropdown-item">FAQ</a>
-              <a href="#" class="dropdown-item">Bog'lanish</a>
-              <a href="#" class="dropdown-item">Texnik yordam</a>
+              <a href="#" class="dropdown-item" data-i18n="nav_faq">FAQ</a>
+              <a href="#" class="dropdown-item" data-i18n="nav_contact">Bog'lanish</a>
+              <a href="#" class="dropdown-item" data-i18n="nav_support">Texnik yordam</a>
             </div>
           </div>
         </nav>
@@ -67,7 +66,20 @@ jj
           <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         </button>
-        <button class="btn-login" id="loginBtn">Kirish</button>
+
+        <div class="lang-selector nav__item--dropdown">
+          <button class="nav__link lang-btn" id="langBtn">
+            <span>UZ</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="dropdown-menu dropdown-menu--small">
+            <a href="#" class="dropdown-item lang-item" data-lang="uz">UZ - O'zbekcha</a>
+            <a href="#" class="dropdown-item lang-item" data-lang="ru">RU - Русский</a>
+            <a href="#" class="dropdown-item lang-item" data-lang="en">EN - English</a>
+          </div>
+        </div>
+
+        <button class="btn-login" id="loginBtn" data-i18n="login">Kirish</button>
         <button class="hamburger" id="hamburger" aria-label="Menu">
           <span></span>
           <span></span>
@@ -89,14 +101,14 @@ jj
           <div class="hero__slide active">
             <div class="hero__wrapper">
               <div class="hero__content">
-                <span class="hero__badge">Original GM Parts</span>
-                <h1 class="hero__title">Dvigatel Qismlari</h1>
-                <p class="hero__subtitle">
+                <span class="hero__badge" data-i18n="hero_badge_1">Original GM Parts</span>
+                <h1 class="hero__title" data-i18n="hero_title_1">Dvigatel Qismlari</h1>
+                <p class="hero__subtitle" data-i18n="hero_subtitle_1">
                   Chevrolet avtomobillari uchun yuqori sifatli<br>original dvigatel va agregat qismlari.
                 </p>
                 <div class="hero__actions">
-                  <button class="btn-primary">Sotib olish</button>
-                  <button class="btn-outline">Katalog</button>
+                  <button class="btn-primary" data-i18n="buy_now">Sotib olish</button>
+                  <button class="btn-outline" data-i18n="catalog">Katalog</button>
                 </div>
               </div>
               <div class="hero__image">
@@ -109,14 +121,14 @@ jj
           <div class="hero__slide">
             <div class="hero__wrapper hero__wrapper--blue">
               <div class="hero__content">
-                <span class="hero__badge">Durability</span>
-                <h1 class="hero__title">Hadavoy Qism</h1>
-                <p class="hero__subtitle">
+                <span class="hero__badge" data-i18n="hero_badge_2">Durability</span>
+                <h1 class="hero__title" data-i18n="hero_title_2">Hadavoy Qism</h1>
+                <p class="hero__subtitle" data-i18n="hero_subtitle_2">
                   Silliq va xavfsiz harakatlanish uchun<br>purjina, amortizator va g'ildirak qismlari.
                 </p>
                 <div class="hero__actions">
-                  <button class="btn-primary">Sotib olish</button>
-                  <button class="btn-outline">Bog'lanish</button>
+                  <button class="btn-primary" data-i18n="buy_now">Sotib olish</button>
+                  <button class="btn-outline" data-i18n="contact">Bog'lanish</button>
                 </div>
               </div>
               <div class="hero__image">
@@ -129,14 +141,14 @@ jj
           <div class="hero__slide">
             <div class="hero__wrapper hero__wrapper--green">
               <div class="hero__content">
-                <span class="hero__badge">Quick Delivery</span>
-                <h1 class="hero__title">Kuzov Qismlari</h1>
-                <p class="hero__subtitle">
+                <span class="hero__badge" data-i18n="hero_badge_3">Quick Delivery</span>
+                <h1 class="hero__title" data-i18n="hero_title_3">Kuzov Qismlari</h1>
+                <p class="hero__subtitle" data-i18n="hero_subtitle_3">
                   Fara, bamper va boshqa kuzov detallari<br>shahar bo'ylab tezkor yetkazib berish bilan.
                 </p>
                 <div class="hero__actions">
-                  <button class="btn-primary">Savatchaga o'tish</button>
-                  <button class="btn-outline">Barcha qismlar</button>
+                  <button class="btn-primary" data-i18n="go_to_cart">Savatchaga o'tish</button>
+                  <button class="btn-outline" data-i18n="all_parts">Barcha qismlar</button>
                 </div>
               </div>
               <div class="hero__image">
@@ -164,20 +176,20 @@ jj
       <div class="container">
         <div class="dreams__header">
           <div>
-            <p class="section__label">Ehtiyot qismlar</p>
-            <h2 class="section__title">GM ehtiyot qismlarini tanlang</h2>
-            <p class="section__subtitle">Chevrolet avtomobillaringiz uchun yuqori sifatli ehtiyot qismlar</p>
+            <p class="section__label" data-i18n="parts_label">Ehtiyot qismlar</p>
+            <h2 class="section__title" data-i18n="parts_title">GM ehtiyot qismlarini tanlang</h2>
+            <p class="section__subtitle" data-i18n="parts_subtitle">Chevrolet avtomobillaringiz uchun yuqori sifatli ehtiyot qismlar</p>
           </div>
         </div>
 
         <div class="tabs" id="tabs">
-          <button class="tab active" data-type="all">Hammasi</button>
-          <button class="tab" data-type="engine">Dvigatel</button>
-          <button class="tab" data-type="suspension">Hadavoy qism</button>
-          <button class="tab" data-type="brake">Tormoz</button>
-          <button class="tab" data-type="filter">Filtrlar</button>
-          <button class="tab" data-type="original">Radnoy detallar</button>
-          <button class="tab" data-type="accessories">Bezklar</button>
+          <button class="tab active" data-type="all" data-i18n="cat_all">Hammasi</button>
+          <button class="tab" data-type="engine" data-i18n="cat_engine_short">Dvigatel</button>
+          <button class="tab" data-type="suspension" data-i18n="cat_suspension_short">Hadavoy qism</button>
+          <button class="tab" data-type="brake" data-i18n="cat_brake_short">Tormoz</button>
+          <button class="tab" data-type="filter" data-i18n="cat_filter_short">Filtrlar</button>
+          <button class="tab" data-type="original" data-i18n="cat_original_short">Radnoy detallar</button>
+          <button class="tab" data-type="accessories" data-i18n="cat_accessories_short">Bezklar</button>
         </div>
 
         <div class="cards" id="cards"></div>
@@ -194,34 +206,34 @@ jj
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <div class="modal__header">
-          <h2>GM Online Shop</h2>
-          <p>Barcha ehtiyot qismlar va aksessuarlar bir joyda</p>
+          <h2 data-i18n="shop_modal_title">GM Online Shop</h2>
+          <p data-i18n="shop_modal_subtitle">Barcha ehtiyot qismlar va aksessuarlar bir joyda</p>
         </div>
         <div class="shop-modal__body">
           <div class="shop-grid">
             <div class="shop-item">
               <div class="shop-item__icon">🚗</div>
-              <h3>Kuzov qismlari</h3>
-              <p>Bamper, fara, eshiklar</p>
+              <h3 data-i18n="shop_cat_kuzov">Kuzov qismlari</h3>
+              <p data-i18n="shop_cat_kuzov_desc">Bamper, fara, eshiklar</p>
             </div>
             <div class="shop-item">
               <div class="shop-item__icon">⚙️</div>
-              <h3>Dvigatel</h3>
-              <p>Porshen, remen, svecha</p>
+              <h3 data-i18n="shop_cat_engine">Dvigatel</h3>
+              <p data-i18n="shop_cat_engine_desc">Porshen, remen, svecha</p>
             </div>
             <div class="shop-item">
               <div class="shop-item__icon">🔋</div>
-              <h3>Elektr jihozlari</h3>
-              <p>Akumulyator, datchiklar</p>
+              <h3 data-i18n="shop_cat_elektr">Elektr jihozlari</h3>
+              <p data-i18n="shop_cat_elektr_desc">Akumulyator, datchiklar</p>
             </div>
             <div class="shop-item">
               <div class="shop-item__icon">🛠️</div>
-              <h3>Xizmat ko'rsatish</h3>
-              <p>Yog'lar, filtrlar, suyuqliklar</p>
+              <h3 data-i18n="shop_cat_service">Xizmat ko'rsatish</h3>
+              <p data-i18n="shop_cat_service_desc">Yog'lar, filtrlar, suyuqliklar</p>
             </div>
           </div>
           <div class="shop-modal__footer">
-            <button class="btn-primary">To'liq katalogni ko'rish</button>
+            <button class="btn-primary" data-i18n="view_full_catalog">To'liq katalogni ko'rish</button>
           </div>
         </div>
       </div>
@@ -232,9 +244,9 @@ jj
       <div class="container">
         <div class="features-card">
           <div class="features-card__text">
-            <p class="section__label section__label--light">Kafolat</p>
-            <h2 class="features-card__title">100% Original GM Ehtiyot Qismlari</h2>
-            <p class="features-card__desc">
+            <p class="section__label section__label--light" data-i18n="features_badge">Kafolat</p>
+            <h2 class="features-card__title" data-i18n="features_title">100% Original GM Ehtiyot Qismlari</h2>
+            <p class="features-card__desc" data-i18n="features_desc">
               Biz faqatgina Chevrolet zavodlaridan to'g'ridan-to'g'ri keltirilgan original mahsulotlarni sotamiz. 
               Sizning avtomobilingiz uzoq va sifatli xizmat qilishi uchun faqat eng yaxshi qismlarni tanlang.
             </p>
@@ -243,22 +255,22 @@ jj
                 <div class="feature-box__icon">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <span>Sifat kafolati va original mahsulotlar</span>
+                <span data-i18n="feature_1">Sifat kafolati va original mahsulotlar</span>
               </div>
               <div class="feature-box">
                 <div class="feature-box__icon">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polyline points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
                 </div>
-                <span>O'zbekiston bo'ylab tezkor yetkazib berish</span>
+                <span data-i18n="feature_2">O'zbekiston bo'ylab tezkor yetkazib berish</span>
               </div>
               <div class="feature-box">
                 <div class="feature-box__icon">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
                 </div>
-                <span>Mutaxassisdan bepul texnik maslahat</span>
+                <span data-i18n="feature_3">Mutaxassisdan bepul texnik maslahat</span>
               </div>
             </div>
-            <button class="btn-primary">Batafsil ma'lumot</button>
+            <button class="btn-primary" data-i18n="learn_more">Batafsil ma'lumot</button>
           </div>
           <div class="features-card__image">
             <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" style="border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);" alt="Original Parts" />
@@ -276,7 +288,7 @@ jj
 
         <div class="footer__brand">
           <img style="height: 130px; max-width: 350px; width: auto; object-fit: contain;" src="images/751.png" alt="Footer Logo" class="footer__logo" />
-          <p class="footer__brand-desc">Chevrolet avtomobillari uchun original GM ehtiyot qismlari do'koni. Sifat va ishonch kafolati.</p>
+          <p class="footer__brand-desc" data-i18n="footer_desc">Chevrolet avtomobillari uchun original GM ehtiyot qismlari do'koni. Sifat va ishonch kafolati.</p>
           <div class="footer__socials">
             <a href="#" class="social-btn" aria-label="Facebook">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
@@ -291,38 +303,38 @@ jj
         </div>
 
         <div class="footer__col">
-          <h3 class="footer__col-title">Asosiy</h3>
+          <h3 class="footer__col-title" data-i18n="footer_main">Asosiy</h3>
           <ul class="footer__links">
-            <li><a href="#">Mening buyurtmalarim</a></li>
-            <li><a href="#">Savatcha</a></li>
-            <li><a href="#">Profil</a></li>
+            <li><a href="#" data-i18n="footer_orders">Mening buyurtmalarim</a></li>
+            <li><a href="#" data-i18n="footer_cart">Savatcha</a></li>
+            <li><a href="#" data-i18n="footer_profile">Profil</a></li>
           </ul>
         </div>
 
         <div class="footer__col">
-          <h3 class="footer__col-title">Kategoriyalar</h3>
+          <h3 class="footer__col-title" data-i18n="footer_categories">Kategoriyalar</h3>
           <ul class="footer__links">
-            <li><a href="#">Dvigatel qismlari</a></li>
-            <li><a href="#">Transmissiya</a></li>
-            <li><a href="#">Kuzov qismlari</a></li>
+            <li><a href="#" data-i18n="cat_engine">Dvigatel qismlari</a></li>
+            <li><a href="#" data-i18n="cat_trans">Transmissiya</a></li>
+            <li><a href="#" data-i18n="cat_kuzov">Kuzov qismlari</a></li>
           </ul>
         </div>
 
         <div class="footer__col">
-          <h3 class="footer__col-title">Kompaniya</h3>
+          <h3 class="footer__col-title" data-i18n="footer_company">Kompaniya</h3>
           <ul class="footer__links">
-            <li><a href="#">Biz haqimizda</a></li>
-            <li><a href="#">Karyera</a></li>
-            <li><a href="#">Aloqa</a></li>
+            <li><a href="#" data-i18n="footer_about">Biz haqimizda</a></li>
+            <li><a href="#" data-i18n="footer_careers">Karyera</a></li>
+            <li><a href="#" data-i18n="footer_contact">Aloqa</a></li>
           </ul>
         </div>
 
         <div class="footer__col">
-          <h3 class="footer__col-title">Newsletter</h3>
-          <p class="footer__links-desc" style="font-size: 13px; margin-bottom: 15px; color: rgba(255,255,255,0.4);">Eng so'nggi yangiliklar va chegirmalardan xabardor bo'ling.</p>
+          <h3 class="footer__col-title" data-i18n="newsletter_title">Newsletter</h3>
+          <p class="footer__links-desc" data-i18n="newsletter_desc" style="font-size: 13px; margin-bottom: 15px; color: rgba(255,255,255,0.4);">Eng so'nggi yangiliklar va chegirmalardan xabardor bo'ling.</p>
           <form class="footer__newsletter">
-            <input type="email" placeholder="Emailingiz" style="width: 100%; padding: 10px 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; margin-bottom: 10px; font-size: 14px;">
-            <button type="submit" class="btn-primary btn--full" style="padding: 10px;">Obuna bo'lish</button>
+            <input type="email" placeholder="Emailingiz" data-i18n-placeholder="email_placeholder" style="width: 100%; padding: 10px 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; margin-bottom: 10px; font-size: 14px;">
+            <button type="submit" class="btn-primary btn--full" data-i18n="subscribe" style="padding: 10px;">Obuna bo'lish</button>
           </form>
         </div>
 
@@ -346,29 +358,29 @@ jj
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="modal__header">
-        <h2>Xush kelibsiz</h2>
-        <p>Tizimga kirish uchun ma'lumotlaringizni kiriting</p>
+        <h2 data-i18n="login_title">Xush kelibsiz</h2>
+        <p data-i18n="login_subtitle">Tizimga kirish uchun ma'lumotlaringizni kiriting</p>
       </div>
       <form class="modal__form">
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email" data-i18n="email_label">Email</label>
           <input type="email" id="email" placeholder="example@mail.com" required>
         </div>
         <div class="form-group">
-          <label for="phone">Telefon raqami</label>
+          <label for="phone" data-i18n="phone_label">Telefon raqami</label>
           <input type="tel" id="phone" placeholder="+998 90 123 45 67" required>
         </div>
         <div class="form-group">
-          <label for="password">Parol</label>
+          <label for="password" data-i18n="password_label">Parol</label>
           <input type="password" id="password" placeholder="********" required>
         </div>
         <div class="form-options">
-          <label class="remember-me">
+          <label class="remember-me" data-i18n="remember_me">
             <input type="checkbox"> Eslab qolish
           </label>
-          <a href="#" class="forgot-password">Parolni unutdingizmi?</a>
+          <a href="#" class="forgot-password" data-i18n="forgot_password">Parolni unutdingizmi?</a>
         </div>
-        <button type="submit" class="btn-primary btn--full">Kirish</button>
+        <button type="submit" class="btn-primary btn--full" data-i18n="login_btn">Kirish</button>
       </form>
     </div>
   </div>
@@ -381,19 +393,19 @@ jj
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="modal__header">
-        <h2>Savatcha</h2>
-        <p>Siz tanlagan mahsulotlar ro'yxati</p>
+        <h2 data-i18n="cart_title">Savatcha</h2>
+        <p data-i18n="cart_subtitle">Siz tanlagan mahsulotlar ro'yxati</p>
       </div>
       <div class="cart-modal__body" id="cartItems">
         <!-- Cart items will be here -->
-        <p class="empty-cart-msg">Savatchangiz hozircha bo'sh.</p>
+        <p class="empty-cart-msg" data-i18n="empty_cart">Savatchangiz hozircha bo'sh.</p>
       </div>
       <div class="cart-modal__footer">
         <div class="cart-total">
-          <span>Umumiy:</span>
+          <span data-i18n="total">Umumiy:</span>
           <span id="cartTotalSum">0 UZS</span>
         </div>
-        <button class="btn-primary btn--full" id="orderBtn">Buyurtma qilish</button>
+        <button class="btn-primary btn--full" id="orderBtn" data-i18n="order_btn">Buyurtma qilish</button>
       </div>
     </div>
   </div>

@@ -244,13 +244,72 @@ render();
 const sections = {
     dashboard: document.getElementById('dashboardSection'),
     statistics: document.getElementById('statisticsSection'),
-    users: document.getElementById('usersSection')
+    users: document.getElementById('usersSection'),
+    settings: document.getElementById('settingsSection')
 };
 
 const navLinks = {
     dashboard: document.getElementById('navDashboard'),
     statistics: document.getElementById('navStatistics'),
-    users: document.getElementById('navUsers')
+    users: document.getElementById('navUsers'),
+    settings: document.getElementById('navSettings')
+};
+
+const translationsAdmin = {
+    uz: {
+        dashboard: "Dashboard",
+        statistics: "Statistika",
+        users: "Foydalanuvchilar",
+        settings: "Sozlamalar",
+        welcome: "Xush kelibsiz, Admin!",
+        newProduct: "Yangi mahsulot",
+        setThemeTitle: "Tashqi ko'rinish",
+        setThemeName: "Tungi rejim",
+        setThemeDesc: "Admin panelni qora rangga o'tkazish",
+        setLangTitle: "Til sozlamalari",
+        setLangName: "Tizim tili",
+        setLangDesc: "Admin panel interfeys tili",
+        setProfileTitle: "Admin Profili",
+        setProfileNameLabel: "Admin ismi",
+        setProfileEmailLabel: "Email manzili",
+        save: "Saqlash"
+    },
+    ru: {
+        dashboard: "Панель управления",
+        statistics: "Статистика",
+        users: "Пользователи",
+        settings: "Настройки",
+        welcome: "Добро пожаловать, Админ!",
+        newProduct: "Новый продукт",
+        setThemeTitle: "Внешний вид",
+        setThemeName: "Темный режим",
+        setThemeDesc: "Переключить админ панель в темный режим",
+        setLangTitle: "Языковые настройки",
+        setLangName: "Язык системы",
+        setLangDesc: "Язык интерфейса админ панели",
+        setProfileTitle: "Профиль Админа",
+        setProfileNameLabel: "Имя админа",
+        setProfileEmailLabel: "Email адрес",
+        save: "Сохранить"
+    },
+    en: {
+        dashboard: "Dashboard",
+        statistics: "Statistics",
+        users: "Users",
+        settings: "Settings",
+        welcome: "Welcome, Admin!",
+        newProduct: "New Product",
+        setThemeTitle: "Appearance",
+        setThemeName: "Dark Mode",
+        setThemeDesc: "Switch admin panel to dark mode",
+        setLangTitle: "Language Settings",
+        setLangName: "System Language",
+        setLangDesc: "Admin panel interface language",
+        setProfileTitle: "Admin Profile",
+        setProfileNameLabel: "Admin Name",
+        setProfileEmailLabel: "Email Address",
+        save: "Save"
+    }
 };
 
 function showSection(sectionName) {
@@ -281,11 +340,98 @@ function showSection(sectionName) {
         if (sections.dashboard) sections.dashboard.querySelector('.product-table-card').style.display = 'none';
         if (sections.dashboard) sections.dashboard.querySelector('.stats-grid').style.display = 'none';
     } else if (sectionName === 'users') {
-        pageTitle.textContent = 'Foydalanuvchilar';
+        pageTitle.textContent = translationsAdmin[currentLang].users;
         openAddModal.style.display = 'none';
         renderUsers();
+    } else if (sectionName === 'settings') {
+        pageTitle.textContent = translationsAdmin[currentLang].settings;
+        openAddModal.style.display = 'none';
     }
 }
+
+// --- SETTINGS LOGIC ---
+let currentLang = localStorage.getItem('admin_lang') || 'uz';
+
+function applyAdminLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('admin_lang', lang);
+    const t = translationsAdmin[lang];
+    
+    // Update sidebar
+    if (navLinks.dashboard) navLinks.dashboard.querySelector('span').textContent = t.dashboard;
+    if (navLinks.statistics) navLinks.statistics.querySelector('span').textContent = t.statistics;
+    if (navLinks.users) navLinks.users.querySelector('span').textContent = t.users;
+    if (navLinks.settings) navLinks.settings.querySelector('span').textContent = t.settings;
+    
+    // Update header
+    const pageTitle = document.getElementById('pageTitle');
+    const openAddModal = document.getElementById('openAddModal');
+    const welcomeText = document.querySelector('.admin-header p');
+    
+    if (welcomeText) welcomeText.textContent = t.welcome;
+    if (openAddModal) openAddModal.textContent = t.newProduct;
+    
+    // Update settings section
+    document.getElementById('setThemeTitle').textContent = t.setThemeTitle;
+    document.getElementById('setThemeName').textContent = t.setThemeName;
+    document.getElementById('setThemeDesc').textContent = t.setThemeDesc;
+    document.getElementById('setLangTitle').textContent = t.setLangTitle;
+    document.getElementById('setLangName').textContent = t.setLangName;
+    document.getElementById('setLangDesc').textContent = t.setLangDesc;
+    document.getElementById('setProfileTitle').textContent = t.setProfileTitle;
+    document.getElementById('setProfileNameLabel').textContent = t.setProfileNameLabel;
+    document.getElementById('setProfileEmailLabel').textContent = t.setProfileEmailLabel;
+    document.getElementById('saveProfileBtn').textContent = t.save;
+    
+    // Set selector value
+    document.getElementById('adminLangSelector').value = lang;
+}
+
+// Theme logic
+const themeToggle = document.getElementById('adminThemeToggle');
+const body = document.body;
+
+function setTheme(isDark) {
+    if (isDark) {
+        body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('admin_theme', 'dark');
+        themeToggle.checked = true;
+    } else {
+        body.removeAttribute('data-theme');
+        localStorage.setItem('admin_theme', 'light');
+        themeToggle.checked = false;
+    }
+}
+
+themeToggle.addEventListener('change', (e) => {
+    setTheme(e.target.checked);
+});
+
+// Language logic
+document.getElementById('adminLangSelector').addEventListener('change', (e) => {
+    applyAdminLang(e.target.value);
+});
+
+// Profile logic
+document.getElementById('saveProfileBtn').addEventListener('click', () => {
+    const name = document.getElementById('adminNameInput').value;
+    const email = document.getElementById('adminEmailInput').value;
+    localStorage.setItem('admin_name', name);
+    localStorage.setItem('admin_email', email);
+    alert(currentLang === 'uz' ? 'Sozlamalar saqlandi!' : (currentLang === 'ru' ? 'Настройки сохранены!' : 'Settings saved!'));
+});
+
+// Initialize Settings
+const savedTheme = localStorage.getItem('admin_theme');
+setTheme(savedTheme === 'dark');
+
+const savedName = localStorage.getItem('admin_name');
+if (savedName) document.getElementById('adminNameInput').value = savedName;
+
+const savedEmail = localStorage.getItem('admin_email');
+if (savedEmail) document.getElementById('adminEmailInput').value = savedEmail;
+
+applyAdminLang(currentLang);
 
 function renderUsers() {
     const usersTableBody = document.getElementById('usersTableBody');
@@ -313,6 +459,7 @@ function renderUsers() {
 navLinks.dashboard?.addEventListener('click', (e) => { e.preventDefault(); showSection('dashboard'); });
 navLinks.statistics?.addEventListener('click', (e) => { e.preventDefault(); showSection('statistics'); });
 navLinks.users?.addEventListener('click', (e) => { e.preventDefault(); showSection('users'); });
+navLinks.settings?.addEventListener('click', (e) => { e.preventDefault(); showSection('settings'); });
 
 // Initialize
 render();
