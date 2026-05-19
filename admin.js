@@ -245,6 +245,7 @@ const sections = {
     dashboard: document.getElementById('dashboardSection'),
     statistics: document.getElementById('statisticsSection'),
     users: document.getElementById('usersSection'),
+    orders: document.getElementById('ordersSection'),
     settings: document.getElementById('settingsSection')
 };
 
@@ -252,6 +253,7 @@ const navLinks = {
     dashboard: document.getElementById('navDashboard'),
     statistics: document.getElementById('navStatistics'),
     users: document.getElementById('navUsers'),
+    orders: document.getElementById('navOrders'),
     settings: document.getElementById('navSettings')
 };
 
@@ -260,6 +262,7 @@ const translationsAdmin = {
         dashboard: "Dashboard",
         statistics: "Statistika",
         users: "Foydalanuvchilar",
+        orders: "Buyurtmalar",
         settings: "Sozlamalar",
         welcome: "Xush kelibsiz, Admin!",
         newProduct: "Yangi mahsulot",
@@ -272,12 +275,14 @@ const translationsAdmin = {
         setProfileTitle: "Admin Profili",
         setProfileNameLabel: "Admin ismi",
         setProfileEmailLabel: "Email manzili",
-        save: "Saqlash"
+        save: "Saqlash",
+        ordersTitle: "Buyurtmalar ro'yxati"
     },
     ru: {
         dashboard: "Панель управления",
         statistics: "Статистика",
         users: "Пользователи",
+        orders: "Заказы",
         settings: "Настройки",
         welcome: "Добро пожаловать, Админ!",
         newProduct: "Новый продукт",
@@ -290,12 +295,14 @@ const translationsAdmin = {
         setProfileTitle: "Профиль Админа",
         setProfileNameLabel: "Имя админа",
         setProfileEmailLabel: "Email адрес",
-        save: "Сохранить"
+        save: "Сохранить",
+        ordersTitle: "Список заказов"
     },
     en: {
         dashboard: "Dashboard",
         statistics: "Statistics",
         users: "Users",
+        orders: "Orders",
         settings: "Settings",
         welcome: "Welcome, Admin!",
         newProduct: "New Product",
@@ -308,7 +315,8 @@ const translationsAdmin = {
         setProfileTitle: "Admin Profile",
         setProfileNameLabel: "Admin Name",
         setProfileEmailLabel: "Email Address",
-        save: "Save"
+        save: "Save",
+        ordersTitle: "Orders List"
     }
 };
 
@@ -343,6 +351,10 @@ function showSection(sectionName) {
         pageTitle.textContent = translationsAdmin[currentLang].users;
         openAddModal.style.display = 'none';
         renderUsers();
+    } else if (sectionName === 'orders') {
+        pageTitle.textContent = translationsAdmin[currentLang].orders;
+        openAddModal.style.display = 'none';
+        renderOrders();
     } else if (sectionName === 'settings') {
         pageTitle.textContent = translationsAdmin[currentLang].settings;
         openAddModal.style.display = 'none';
@@ -361,6 +373,7 @@ function applyAdminLang(lang) {
     if (navLinks.dashboard) navLinks.dashboard.querySelector('span').textContent = t.dashboard;
     if (navLinks.statistics) navLinks.statistics.querySelector('span').textContent = t.statistics;
     if (navLinks.users) navLinks.users.querySelector('span').textContent = t.users;
+    if (navLinks.orders) navLinks.orders.querySelector('span').textContent = t.orders;
     if (navLinks.settings) navLinks.settings.querySelector('span').textContent = t.settings;
     
     // Update header
@@ -370,6 +383,10 @@ function applyAdminLang(lang) {
     
     if (welcomeText) welcomeText.textContent = t.welcome;
     if (openAddModal) openAddModal.textContent = t.newProduct;
+    
+    // Update orders title
+    const ordersTitle = document.getElementById('ordersTitle');
+    if (ordersTitle) ordersTitle.textContent = t.ordersTitle;
     
     // Update settings section
     document.getElementById('setThemeTitle').textContent = t.setThemeTitle;
@@ -459,7 +476,88 @@ function renderUsers() {
 navLinks.dashboard?.addEventListener('click', (e) => { e.preventDefault(); showSection('dashboard'); });
 navLinks.statistics?.addEventListener('click', (e) => { e.preventDefault(); showSection('statistics'); });
 navLinks.users?.addEventListener('click', (e) => { e.preventDefault(); showSection('users'); });
+navLinks.orders?.addEventListener('click', (e) => { e.preventDefault(); showSection('orders'); });
 navLinks.settings?.addEventListener('click', (e) => { e.preventDefault(); showSection('settings'); });
+
+function renderOrders() {
+    const ordersTableBody = document.getElementById('ordersTableBody');
+    if (!ordersTableBody) return;
+    
+    const orders = JSON.parse(localStorage.getItem('gm_orders')) || [];
+    ordersTableBody.innerHTML = '';
+    
+    if (orders.length === 0) {
+        const noOrdersText = currentLang === 'uz' ? 'Hozircha buyurtmalar yo\'q' : (currentLang === 'ru' ? 'Заказов пока нет' : 'No orders yet');
+        ordersTableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: var(--text-light);">${noOrdersText}</td></tr>`;
+        return;
+    }
+    
+    orders.forEach((order, index) => {
+        const row = document.createElement('tr');
+        
+        // Render items list inside small container
+        const itemsHtml = order.items.map(item => `
+            <div style="font-size: 13px; margin-bottom: 2px;">
+                • <strong>${item.name}</strong> - ${item.price}
+            </div>
+        `).join('');
+        
+        // Status styles
+        const isCompleted = order.status === 'Bajarildi';
+        const statusText = isCompleted ? (currentLang === 'uz' ? 'Bajarildi' : (currentLang === 'ru' ? 'Выполнен' : 'Completed')) : (currentLang === 'uz' ? 'Yangi' : (currentLang === 'ru' ? 'Новый' : 'New'));
+        const statusStyle = isCompleted 
+            ? 'background: rgba(0, 195, 122, 0.1); color: #00c37a;' 
+            : 'background: rgba(245, 158, 11, 0.1); color: #f59e0b;';
+            
+        row.innerHTML = `
+            <td><strong>${order.id}</strong></td>
+            <td>
+                <div><strong>${order.userEmail}</strong></div>
+                <div style="font-size: 12px; color: var(--text-light);">${order.userPhone}</div>
+            </td>
+            <td>
+                <div style="max-height: 80px; overflow-y: auto; padding-right: 5px;">
+                    ${itemsHtml}
+                </div>
+            </td>
+            <td><strong>${order.totalPrice.toLocaleString()} UZS</strong></td>
+            <td style="font-size: 13px; color: var(--text-light);">${order.date}</td>
+            <td><span class="status-badge" style="${statusStyle}">${statusText}</span></td>
+            <td>
+                <div class="actions">
+                    ${!isCompleted ? `
+                        <button class="action-btn" style="background: rgba(0,195,122,0.1); color: #00c37a;" onclick="completeOrder(${index})" title="${currentLang === 'uz' ? 'Bajarildi deb belgilash' : (currentLang === 'ru' ? 'Отметить как выполненный' : 'Mark as completed')}">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        </button>
+                    ` : ''}
+                    <button class="action-btn action-btn--delete" onclick="deleteOrder(${index})" title="${currentLang === 'uz' ? 'O\'chirish' : (currentLang === 'ru' ? 'Удалить' : 'Delete')}">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                    </button>
+                </div>
+            </td>
+        `;
+        ordersTableBody.appendChild(row);
+    });
+}
+
+window.completeOrder = (index) => {
+    const orders = JSON.parse(localStorage.getItem('gm_orders')) || [];
+    if (orders[index]) {
+        orders[index].status = 'Bajarildi';
+        localStorage.setItem('gm_orders', JSON.stringify(orders));
+        renderOrders();
+    }
+};
+
+window.deleteOrder = (index) => {
+    const confirmMsg = currentLang === 'uz' ? 'Ushbu buyurtmani o\'chirmoqchimisiz?' : (currentLang === 'ru' ? 'Вы действительно хотите удалить этот заказ?' : 'Are you sure you want to delete this order?');
+    if (confirm(confirmMsg)) {
+        const orders = JSON.parse(localStorage.getItem('gm_orders')) || [];
+        orders.splice(index, 1);
+        localStorage.setItem('gm_orders', JSON.stringify(orders));
+        renderOrders();
+    }
+};
 
 // Initialize
 render();

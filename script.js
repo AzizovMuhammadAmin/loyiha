@@ -643,6 +643,23 @@ document.getElementById('orderBtn').addEventListener('click', () => {
         alert("Savatchangiz bo'sh!");
         return;
     }
+    
+    // Save order to localStorage
+    const orderId = 'GM-' + Math.floor(100000 + Math.random() * 900000);
+    const newOrder = {
+        id: orderId,
+        userEmail: localStorage.getItem('userEmail') || 'Noma\'lum',
+        userPhone: localStorage.getItem('userPhone') || 'Noma\'lum',
+        items: [...cart],
+        totalPrice: cart.reduce((total, item) => total + (parseInt(item.price.replace(/\D/g, '')) || 0), 0),
+        date: new Date().toLocaleString(),
+        status: 'Yangi'
+    };
+    
+    let orders = JSON.parse(localStorage.getItem('gm_orders')) || [];
+    orders.unshift(newOrder);
+    localStorage.setItem('gm_orders', JSON.stringify(orders));
+
     alert("Buyurtmangiz qabul qilindi! Tezz orada operatorimiz siz bilan bog'lanadi.");
     cart = [];
     updateCartUI();
