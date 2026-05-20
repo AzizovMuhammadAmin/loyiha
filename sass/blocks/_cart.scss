@@ -21,12 +21,6 @@
     box-shadow: 0 12px 25px rgba(0, 195, 122, 0.4);
     filter: brightness(1.1);
   }
-}
-
-#topBtn.visible ~ #cartBtn {
-  right: 102px;
-}
-
   .cart-badge {
     position: absolute;
     top: -8px;
@@ -45,6 +39,10 @@
     border: 2.5px solid var(--color-bg);
     box-shadow: 0 4px 10px rgba(255, 59, 48, 0.3);
   }
+}
+
+#topBtn.visible ~ #cartBtn {
+  right: 102px;
 }
 
 .cart-modal__body {

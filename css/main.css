@@ -248,6 +248,10 @@ button {
   background: rgba(0, 195, 122, 0.05);
 }
 
+.nav__mobile-controls {
+  display: none;
+}
+
 .nav__item--dropdown {
   position: relative;
 }
