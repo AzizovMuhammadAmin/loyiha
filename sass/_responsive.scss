@@ -33,6 +33,12 @@
 @media (max-width: 768px) {
   .header__phone { display: none; }
   
+  .header__right {
+    .theme-toggle, .lang-selector, .btn-login {
+      display: none !important;
+    }
+  }
+  
   // Mobile Nav Toggle
   .hamburger {
     display: flex !important;
@@ -52,6 +58,7 @@
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 100;
     border-top: 1px solid var(--color-border);
+    overflow-y: auto;
 
     &.active {
       transform: translateX(0);
@@ -91,6 +98,72 @@
         text-align: center;
         padding: 12px;
         font-size: 16px;
+      }
+    }
+
+    .nav__mobile-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-border);
+
+      .theme-toggle {
+        display: flex !important;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--color-border);
+        background: transparent;
+        color: var(--color-text);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .lang-selector {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .lang-btn {
+          width: 100%;
+          justify-content: center;
+          padding: 12px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .dropdown-menu {
+          position: static;
+          width: 100%;
+          box-shadow: none;
+          background: rgba(0,0,0,0.03);
+          border: none;
+          display: none;
+          margin-top: 5px;
+          opacity: 1;
+          visibility: visible;
+          transform: none;
+          padding: 8px;
+          border-radius: 16px;
+        }
+
+        &.is-open .dropdown-menu {
+          display: block;
+        }
+      }
+
+      .btn-login {
+        display: block !important;
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        text-align: center;
       }
     }
   }

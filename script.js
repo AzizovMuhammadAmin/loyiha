@@ -476,7 +476,7 @@ document.querySelectorAll(".tab").forEach(btn => {
 });
 
 // Header Dropdown click handling
-document.querySelectorAll(".dropdown-item").forEach(item => {
+document.querySelectorAll(".dropdown-item:not(.lang-item)").forEach(item => {
   item.addEventListener("click", (e) => {
     const type = item.dataset.type;
     
@@ -565,7 +565,6 @@ topBtn.onclick = function () {
 
 // --- MODAL LOGIC (LOGIN, SHOP, CART) ---
 const modals = [
-    { btn: "loginBtn", modal: "loginModal", close: "closeModal", overlay: "modalOverlay" },
     { btn: "seeAllBtn", modal: "shopModal", close: "closeShopModal", overlay: "shopModalOverlay" },
     { btn: "cartBtn", modal: "cartModal", close: "closeCartModal", overlay: "cartModalOverlay" }
 ];
@@ -582,40 +581,45 @@ modals.forEach(m => {
             document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : '';
         };
 
-        if (m.btn === 'loginBtn') {
-            // Special handling for login button: toggle login/logout OR open modal
-            btn.addEventListener('click', () => {
-                const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
-                if (isLoggedIn) {
-                    // Logout
-                    localStorage.removeItem('loggedIn');
-                    localStorage.removeItem('userEmail');
-                    localStorage.removeItem('userPhone');
-                    localStorage.removeItem('userAvatar');
-                    refreshLoginButton();
-                } else {
-                    // Open modal
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-            });
-            // Close buttons should ONLY close, not trigger login logic
-            if (close) close.addEventListener('click', () => {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-            if (overlay) overlay.addEventListener('click', () => {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        } else {
-            // Normal toggle for other modals
-            btn.addEventListener('click', toggle);
-            if (close) close.addEventListener('click', toggle);
-            if (overlay) overlay.addEventListener('click', toggle);
-        }
+        btn.addEventListener('click', toggle);
+        if (close) close.addEventListener('click', toggle);
+        if (overlay) overlay.addEventListener('click', toggle);
     }
 });
+
+// Login buttons handling (desktop & mobile)
+const loginModal = document.getElementById('loginModal');
+if (loginModal) {
+    const loginClose = document.getElementById('closeModal');
+    const loginOverlay = document.getElementById('modalOverlay');
+
+    document.querySelectorAll('.btn-login').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+            if (isLoggedIn) {
+                // Logout
+                localStorage.removeItem('loggedIn');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userPhone');
+                localStorage.removeItem('userAvatar');
+                refreshLoginButton();
+            } else {
+                // Open modal
+                loginModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    if (loginClose) loginClose.addEventListener('click', () => {
+        loginModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    if (loginOverlay) loginOverlay.addEventListener('click', () => {
+        loginModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+}
 
 // Close on Escape
 window.addEventListener("keydown", (e) => {
@@ -708,26 +712,24 @@ document.getElementById('orderBtn').addEventListener('click', () => {
 // Update login button on page load if already logged in
 function refreshLoginButton() {
     const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
-    const loginBtn = document.getElementById('loginBtn');
+    const loginBtns = document.querySelectorAll('.btn-login');
     const lang = localStorage.getItem('selected_lang') || 'uz';
     const t = translations[lang.toLowerCase()];
 
-    if (isLoggedIn) {
-        if (loginBtn) {
-            loginBtn.textContent = t.logout;
-            loginBtn.classList.add('logged-in');
+    loginBtns.forEach(btn => {
+        if (isLoggedIn) {
+            btn.textContent = t.logout;
+            btn.classList.add('logged-in');
+        } else {
+            btn.textContent = t.login;
+            btn.classList.remove('logged-in');
         }
-    } else {
-        if (loginBtn) {
-            loginBtn.textContent = t.login;
-            loginBtn.classList.remove('logged-in');
-        }
-    }
+    });
 }
 refreshLoginButton();
 
 // --- THEME TOGGLE LOGIC ---
-const themeToggle = document.getElementById("themeToggle");
+const themeToggles = document.querySelectorAll(".theme-toggle");
 const htmlElement = document.documentElement;
 
 const getTheme = () => localStorage.getItem("theme") || "light";
@@ -737,13 +739,13 @@ const setTheme = (theme) => {
   localStorage.setItem("theme", theme);
 };
 
-if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
+themeToggles.forEach(toggle => {
+  toggle.addEventListener("click", () => {
     const currentTheme = getTheme();
     const newTheme = currentTheme === "light" ? "dark" : "light";
     setTheme(newTheme);
   });
-}
+});
 
 // --- MOBILE MENU LOGIC ---
 if (hamburger && nav) {
@@ -754,39 +756,47 @@ if (hamburger && nav) {
   });
 
   // Close menu on link click
-  nav.querySelectorAll(".nav__link").forEach(link => {
+  nav.querySelectorAll(".nav__link, .dropdown-item").forEach(link => {
     link.addEventListener("click", () => {
-      hamburger.classList.remove("active");
-      nav.classList.remove("active");
-      document.body.style.overflow = "";
+      const isDropdownTrigger = link.closest('.nav__item--dropdown') && !link.classList.contains('dropdown-item') && !link.classList.contains('lang-item');
+      const href = link.getAttribute('href');
+      
+      if (link.classList.contains('lang-item') || (!isDropdownTrigger && href !== '#' && !link.classList.contains('lang-btn'))) {
+        hamburger.classList.remove("active");
+        nav.classList.remove("active");
+        document.body.style.overflow = "";
+      }
     });
   });
 }
 
 // --- LANGUAGE SELECTOR LOGIC ---
-const langSelector = document.querySelector('.lang-selector');
-const langBtn = document.getElementById('langBtn');
-const langItems = document.querySelectorAll('.lang-item');
+const langSelectors = document.querySelectorAll('.lang-selector');
 
-if (langBtn && langSelector) {
-  langBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    langSelector.classList.toggle('is-open');
-    
-    // Close other dropdowns if any are open
-    document.querySelectorAll('.nav__item--dropdown').forEach(item => {
-      if (item !== langSelector) item.classList.remove('is-open');
+langSelectors.forEach(langSelector => {
+  const langBtn = langSelector.querySelector('.lang-btn');
+  if (langBtn) {
+    langBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Close other dropdowns
+      langSelectors.forEach(other => {
+        if (other !== langSelector) other.classList.remove('is-open');
+      });
+      
+      langSelector.classList.toggle('is-open');
     });
-  });
-}
-
-langItems.forEach(item => {
-  item.addEventListener('click', (e) => {
-    e.preventDefault();
-    const lang = item.dataset.lang.toLowerCase();
-    changeLanguage(lang);
-    langSelector.classList.remove('is-open');
+  }
+  
+  const langItems = langSelector.querySelectorAll('.lang-item');
+  langItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const lang = item.dataset.lang.toLowerCase();
+      changeLanguage(lang);
+      langSelector.classList.remove('is-open');
+    });
   });
 });
 
@@ -826,10 +836,10 @@ function changeLanguage(lang) {
     accessories: t.cat_accessories_short
   };
 
-  // Update header button label
-  if (langBtn) {
-    langBtn.querySelector('span').textContent = lang.toUpperCase();
-  }
+  // Update header button labels
+  document.querySelectorAll('.lang-btn span').forEach(span => {
+    span.textContent = lang.toUpperCase();
+  });
 
   // Refresh login button text
   refreshLoginButton();
