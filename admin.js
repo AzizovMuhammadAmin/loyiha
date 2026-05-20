@@ -3,7 +3,7 @@ const initialData = [
     id: 1,
     name: "Yog' filtri",
     type: "filter",
-    price: "85,000 UZS",
+    price: "85,000",
     brand: "GM Original",
     status: "Mavjud",
     img: "https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24?w=400&h=200&fit=crop&q=80"
@@ -95,7 +95,7 @@ function render() {
             <td><img src="${p.img || 'images/logo.png'}" class="product-img" onerror="this.src='images/logo.png'"></td>
             <td><strong>${p.name}</strong></td>
             <td>${typeLabels[p.type] || p.type}</td>
-            <td>${p.price} UZS</td>
+            <td>${p.price}</td>
             <td><span class="status-badge ${p.status === 'Sotildi' ? 'status-badge--danger' : 'status-badge--success'}" style="${p.status === 'Sotildi' ? 'background: rgba(239,68,68,0.1); color: #ef4444;' : ''}">${p.status}</span></td>
             <td>
                 <div class="actions">
@@ -341,7 +341,7 @@ function showSection(sectionName) {
             sections.dashboard.querySelector('.product-table-card').style.display = 'block';
             sections.dashboard.querySelector('.stats-grid').style.display = 'grid';
         }
-    } else if (sectionName === 'statistics') {
+    } else if (sectionName === 'statistics') { q
         pageTitle.textContent = 'Statistika';
         openAddModal.style.display = 'none';
         if (sections.dashboard) sections.dashboard.style.display = 'block';
