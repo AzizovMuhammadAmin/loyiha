@@ -275,7 +275,7 @@ const translationsAdmin = {
         setProfileTitle: "Admin Profili",
         setProfileNameLabel: "Admin ismi",
         setProfileEmailLabel: "Email manzili",
-        save: "Saqlash",
+        logout: "Profildan chiqish",
         ordersTitle: "Buyurtmalar ro'yxati"
     },
     ru: {
@@ -295,7 +295,7 @@ const translationsAdmin = {
         setProfileTitle: "Профиль Админа",
         setProfileNameLabel: "Имя админа",
         setProfileEmailLabel: "Email адрес",
-        save: "Сохранить",
+        logout: "Выйти",
         ordersTitle: "Список заказов"
     },
     en: {
@@ -315,7 +315,7 @@ const translationsAdmin = {
         setProfileTitle: "Admin Profile",
         setProfileNameLabel: "Admin Name",
         setProfileEmailLabel: "Email Address",
-        save: "Save",
+        logout: "Logout",
         ordersTitle: "Orders List"
     }
 };
@@ -398,7 +398,7 @@ function applyAdminLang(lang) {
     document.getElementById('setProfileTitle').textContent = t.setProfileTitle;
     document.getElementById('setProfileNameLabel').textContent = t.setProfileNameLabel;
     document.getElementById('setProfileEmailLabel').textContent = t.setProfileEmailLabel;
-    document.getElementById('saveProfileBtn').textContent = t.save;
+    document.getElementById('saveProfileBtn').textContent = t.logout;
     
     // Set selector value
     document.getElementById('adminLangSelector').value = lang;
@@ -429,13 +429,38 @@ document.getElementById('adminLangSelector').addEventListener('change', (e) => {
     applyAdminLang(e.target.value);
 });
 
+// Auth Logic
+const adminLoginOverlay = document.getElementById('adminLoginOverlay');
+const adminLoginForm = document.getElementById('adminLoginForm');
+
+if (sessionStorage.getItem('admin_auth') === 'true') {
+    adminLoginOverlay.style.display = 'none';
+}
+
+if (adminLoginForm) {
+    adminLoginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const pass = document.getElementById('loginPassword').value;
+
+        if (email === 'admin@gmail.com' && pass === '12345') {
+            sessionStorage.setItem('admin_auth', 'true');
+            adminLoginOverlay.style.opacity = '0';
+            setTimeout(() => {
+                adminLoginOverlay.style.display = 'none';
+            }, 400);
+        } else {
+            alert(currentLang === 'uz' ? 'Email yoki parol xato!' : (currentLang === 'ru' ? 'Неверный email или пароль!' : 'Invalid email or password!'));
+        }
+    });
+}
+
 // Profile logic
 document.getElementById('saveProfileBtn').addEventListener('click', () => {
-    const name = document.getElementById('adminNameInput').value;
-    const email = document.getElementById('adminEmailInput').value;
-    localStorage.setItem('admin_name', name);
-    localStorage.setItem('admin_email', email);
-    alert(currentLang === 'uz' ? 'Sozlamalar saqlandi!' : (currentLang === 'ru' ? 'Настройки сохранены!' : 'Settings saved!'));
+    if (confirm(currentLang === 'uz' ? 'Haqiqatan ham tizimdan chiqmoqchimisiz?' : (currentLang === 'ru' ? 'Вы действительно хотите выйти?' : 'Are you sure you want to logout?'))) {
+        sessionStorage.removeItem('admin_auth');
+        window.location.reload();
+    }
 });
 
 // Initialize Settings

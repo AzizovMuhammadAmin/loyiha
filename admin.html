@@ -265,9 +265,123 @@
             outline: none;
             border-color: var(--admin-primary);
         }
+
+        /* Admin Login Overlay */
+        #adminLoginOverlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, var(--admin-sidebar) 0%, var(--admin-bg) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.4s ease;
+        }
+        .admin-login-card {
+            background: var(--card-bg, #fff);
+            padding: 40px 50px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 420px;
+        }
+        [data-theme="dark"] .admin-login-card {
+            background: #1e293b;
+        }
+        .admin-login-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 195, 122, 0.1);
+            color: var(--admin-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .admin-login-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-main, #1e293b);
+        }
+        [data-theme="dark"] .admin-login-title {
+            color: #f8fafc;
+        }
+        .admin-login-subtitle {
+            font-size: 14px;
+            color: var(--text-light, #64748b);
+            margin-bottom: 30px;
+        }
+        .admin-login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+        .admin-login-input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color, #cbd5e1);
+            background: var(--admin-bg, #f8fafc);
+            font-size: 15px;
+            font-family: inherit;
+            color: inherit;
+        }
+        [data-theme="dark"] .admin-login-input {
+            border-color: #334155;
+            background: #0f172a;
+            color: #f8fafc;
+        }
+        .admin-login-input:focus {
+            outline: none;
+            border-color: var(--admin-primary);
+        }
+        .admin-login-btn {
+            background: var(--admin-primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .admin-login-btn:hover {
+            background: #00a868;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="admin-body">
+
+    <!-- ADMIN LOGIN OVERLAY -->
+    <div id="adminLoginOverlay">
+        <div class="admin-login-card">
+            <div class="admin-login-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+            </div>
+            <h2 class="admin-login-title">Xush Kelibsiz!</h2>
+            <p class="admin-login-subtitle">Admin panelga kirish uchun ma'lumotlarni kiriting</p>
+            <form id="adminLoginForm" class="admin-login-form">
+                <div>
+                    <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-light, #64748b);">Emailingizni kiriting</label>
+                    <input type="email" id="loginEmail" class="admin-login-input" placeholder="admin@gm-parts.uz" required>
+                </div>
+                <div>
+                    <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-light, #64748b);">Parolingizni kiriting</label>
+                    <input type="password" id="loginPassword" class="admin-login-input" placeholder="********" required>
+                </div>
+                <button type="submit" class="admin-login-btn">Tizimga kirish</button>
+            </form>
+        </div>
+    </div>
 
     <aside class="sidebar">
         <div class="sidebar__logo">GM ADMIN</div>
@@ -443,7 +557,7 @@
                             <label id="setProfileEmailLabel">Email manzili</label>
                             <input type="email" value="admin@gm-parts.uz" id="adminEmailInput">
                         </div>
-                        <button class="btn-primary" style="width: 100%; margin-top: 10px;" id="saveProfileBtn">Saqlash</button>
+                        <button class="btn-primary" style="width: 100%; margin-top: 10px;" id="saveProfileBtn">Profildan chiqish</button>
                     </div>
                 </div>
             </div>
