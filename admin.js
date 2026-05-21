@@ -341,7 +341,7 @@ function showSection(sectionName) {
             sections.dashboard.querySelector('.product-table-card').style.display = 'block';
             sections.dashboard.querySelector('.stats-grid').style.display = 'grid';
         }
-    } else if (sectionName === 'statistics') { q
+    } else if (sectionName === 'statistics') {
         pageTitle.textContent = 'Statistika';
         openAddModal.style.display = 'none';
         if (sections.dashboard) sections.dashboard.style.display = 'block';
