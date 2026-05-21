@@ -592,6 +592,21 @@ const loginModal = document.getElementById('loginModal');
 if (loginModal) {
     const loginClose = document.getElementById('closeModal');
     const loginOverlay = document.getElementById('modalOverlay');
+    
+    // Dynamic logic for admin email
+    const loginEmailInput = document.getElementById('email');
+    const loginPhoneInput = document.getElementById('phone');
+    if (loginEmailInput && loginPhoneInput) {
+        loginEmailInput.addEventListener('input', (e) => {
+            if (e.target.value.trim() === 'admin@gmail.com') {
+                loginPhoneInput.required = false;
+                loginPhoneInput.parentElement.style.display = 'none';
+            } else {
+                loginPhoneInput.required = true;
+                loginPhoneInput.parentElement.style.display = 'block';
+            }
+        });
+    }
 
     document.querySelectorAll('.btn-login').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -678,8 +693,17 @@ document.getElementById('orderBtn').addEventListener('click', () => {
                 e.preventDefault();
                 const emailInput = document.getElementById('email');
                 const phoneInput = document.getElementById('phone');
+                const passwordInput = document.getElementById('password');
                 const email = emailInput ? emailInput.value.trim() : '';
                 const phone = phoneInput ? phoneInput.value.trim() : '';
+                const pass = passwordInput ? passwordInput.value : '';
+                
+                // Admin check
+                if (email === 'admin@gmail.com' && pass === '12345') {
+                    sessionStorage.setItem('admin_auth', 'true');
+                    window.location.href = 'admin.html';
+                    return;
+                }
                 
                 // Store login state and info
                 localStorage.setItem('loggedIn', 'true');
