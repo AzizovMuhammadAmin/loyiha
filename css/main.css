@@ -991,6 +991,10 @@ button {
   transform: translateY(0);
 }
 
+#loginModal {
+  z-index: 1050;
+}
+
 .modal__overlay {
   position: absolute;
   top: 0;
