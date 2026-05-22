@@ -623,7 +623,6 @@ button {
   justify-content: space-between;
   margin-bottom: 32px;
 }
-
 .tabs {
   display: flex;
   gap: 8px;
@@ -633,7 +632,14 @@ button {
   border-radius: 100px;
   width: -moz-fit-content;
   width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border: 1px solid var(--color-border);
+  scrollbar-width: none; /* Firefox */
+}
+.tabs::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .tab {
@@ -1506,7 +1512,7 @@ button {
     align-items: center;
     gap: 16px;
     width: 100%;
-    margin-top: auto;
+    margin-top: 24px;
     padding-top: 24px;
     border-top: 1px solid var(--color-border);
   }
